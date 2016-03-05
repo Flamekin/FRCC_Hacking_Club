@@ -1,0 +1,4 @@
+A Vanishing Kind tog Audio/TOG_original.ogg 60000 60000 5
+The Story Begins begin Audio/The_Story_Begins.ogg 60000 60000 5
+Theme of Martin Douglas martintheme Audio/martintheme.ogg 60000 60000 0
+Battle Theme midibattle Audio/midibattle.ogg 60000 60000 5
