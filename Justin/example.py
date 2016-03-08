@@ -17,11 +17,11 @@ cubeImg = pygame.image.load('Images/cube.png')
 cubeImg = pygame.transform.scale(cubeImg, ((displayWidth / 2), (displayHeight / 2)))
 
 pygame.mixer.music.load('sound.mp3')
-pygame.mixer.music.play(0)
+pygame.mixer.music.play(-1)
 
-playButton = pygbutton.PygButton(rect, 'Play')
-feedButton = pygbutton.PygButton(rect, 'Feed')
-cleanButton = pygbutton.PygButton(rect, 'Clean')
+playButton = pygbutton.PygButton((displayWidth / 13, displayHeight / 1.125, 120, 60),'Play')
+feedButton = pygbutton.PygButton((displayWidth / 2.35, displayHeight / 1.125, 120, 60),'Feed')
+cleanButton = pygbutton.PygButton((displayWidth / 1.3, displayHeight / 1.125, 120, 60),'Clean')
 
 def cube(x,y):
     gameDisplay.blit(cubeImg,(x,y))
@@ -45,10 +45,10 @@ while not crashed:
 
     gameDisplay.blit(backgroundImg,(0,0))
     cube(cubeX,cubeY)
-
-    playButton.draw(displaySurface)
-    feedButton.draw(displaySurface)
-    cleanButton.draw(displaySurface)
+    
+    playButton.draw(gameDisplay)
+    feedButton.draw(gameDisplay)
+    cleanButton.draw(gameDisplay)
     
     pygame.display.update()
     clock.tick(60)
