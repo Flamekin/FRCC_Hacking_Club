@@ -1,27 +1,36 @@
 import pygame
+import pygbutton
 
 pygame.init()
 
 displayWidth = 800
 displayHeight = 600
 
-black = (0,0,0)
-white = (255,255,255)
-
 gameDisplay = pygame.display.set_mode((displayWidth,displayHeight))
-pygame.display.set_caption('Zoom')
+pygame.display.set_caption('Cubulicious')
 clock = pygame.time.Clock()
 
-boltImg = pygame.image.load('Images/bolt.png')
+backgroundImg = pygame.image.load('Images/background.png')
+backgroundImg = pygame.transform.scale(backgroundImg, (displayWidth,displayHeight))
 
-def bolt(x,y):
-    gameDisplay.blit(boltImg,(x,y))
+cubeImg = pygame.image.load('Images/cube.png')
+cubeImg = pygame.transform.scale(cubeImg, ((displayWidth / 2), (displayHeight / 2)))
 
-boltX = (displayWidth * 0.45)
-boltY = (displayHeight * 0.8)
+pygame.mixer.music.load('sound.mp3')
+pygame.mixer.music.play(0)
 
-boltXChange = 0
-boltYChange = 0
+playButton = pygbutton.PygButton(rect, 'Play')
+feedButton = pygbutton.PygButton(rect, 'Feed')
+cleanButton = pygbutton.PygButton(rect, 'Clean')
+
+def cube(x,y):
+    gameDisplay.blit(cubeImg,(x,y))
+
+cubeX = (displayWidth * 0.25)
+cubeY = (displayHeight * 0.4)
+
+cubeXChange = 0
+cubeYChange = 0
 
 crashed = False
 
@@ -30,27 +39,16 @@ while not crashed:
         if event.type == pygame.QUIT:
             crashed = True
     
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
-                boltXChange = -5
-            elif event.key == pygame.K_RIGHT:
-                boltXChange = 5
-            elif event.key == pygame.K_UP:
-                boltYChange = -5
-            elif event.key == pygame.K_DOWN:
-                boltYChange = 5
+        playButton.handleEvent(event)
+        feedButton.handleEvent(event)
+        cleanButton.handleEvent(event)
 
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                boltXChange = 0
-            if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
-                boltYChange = 0
+    gameDisplay.blit(backgroundImg,(0,0))
+    cube(cubeX,cubeY)
 
-    gameDisplay.fill(white)
-
-    boltX += boltXChange
-    boltY += boltYChange
-    bolt(boltX,boltY)    
+    playButton.draw(displaySurface)
+    feedButton.draw(displaySurface)
+    cleanButton.draw(displaySurface)
     
     pygame.display.update()
     clock.tick(60)
