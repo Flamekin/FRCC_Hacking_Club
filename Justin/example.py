@@ -16,7 +16,7 @@ backgroundImg = pygame.transform.scale(backgroundImg, (displayWidth,displayHeigh
 cubeImg = pygame.image.load('Images/cube.png')
 cubeImg = pygame.transform.scale(cubeImg, ((displayWidth / 2), (displayHeight / 2)))
 
-pygame.mixer.music.load('sound.mp3')
+pygame.mixer.music.load('Audio/main.mp3')
 pygame.mixer.music.play(-1)
 
 playButton = pygbutton.PygButton((displayWidth / 13, displayHeight / 1.125, 120, 60),'Play')
