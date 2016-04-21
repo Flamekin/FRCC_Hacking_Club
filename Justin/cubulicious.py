@@ -29,8 +29,9 @@ playButton = pygbutton.PygButton((displayWidth / 13, displayHeight / 1.125, 120,
 feedButton = pygbutton.PygButton((displayWidth / 2.35, displayHeight / 1.125, 120, 60),'Feed')
 cleanButton = pygbutton.PygButton((displayWidth / 1.3, displayHeight / 1.125, 120, 60),'Clean')
 
-# Function for redrawing the game window's contents to scale.
 def resize(e):
+    """ Function for redrawing the game window's contents to scale. """
+
     # Need to reference the global variables instead of creating new ones.
     global gameDisplay, displayWidth, displayHeight, backgroundImg, creatureImg, playButton, feedButton, cleanButton
 
@@ -50,8 +51,8 @@ def resize(e):
     feedButton = pygbutton.PygButton((displayWidth / 2.35, displayHeight / 1.125, displayWidth / 6, displayHeight / 10),'Feed')
     cleanButton = pygbutton.PygButton((displayWidth / 1.3, displayHeight / 1.125, displayWidth / 6, displayHeight / 10),'Clean')
 
-# Function for drawing where the creature is.
 def creaturePos(x,y):
+    """ Function for drawing where the creature is located. """
     gameDisplay.blit(creatureImg,(x,y))
 
 # Variable for game close/crash.
