@@ -1,4 +1,6 @@
-How to run:
+Windows users can run the Cubulicious.exe to see the current progress.
+
+How to run with python (only tested on 2.7):
 	- Make sure pygame is installed.
 	- Open up the command line and type: pip install pygbutton
 	- Double click cubulicious.py

@@ -1,5 +1,16 @@
+import os
 import pygame
 import pygbutton
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 pygame.init()
 
@@ -7,21 +18,25 @@ pygame.init()
 displayWidth = 800
 displayHeight = 600
 
-# Sets the game's window size, name, and update speed.
+# Sets the game's window icon, size, name, and update speed.
+icon = pygame.Surface((32,32))
+icon.set_colorkey((0,0,0))
+icon.blit(pygame.image.load(resource_path('Images/icon.png')),(0,0))
+pygame.display.set_icon(icon)
 gameDisplay = pygame.display.set_mode((displayWidth,displayHeight),pygame.RESIZABLE)
 pygame.display.set_caption('Cubulicious')
 clock = pygame.time.Clock()
 
 # Sets the background image for the game.
-backgroundImg = pygame.image.load('Images/background.png')
+backgroundImg = pygame.image.load(resource_path('Images/background.png'))
 backgroundImg = pygame.transform.scale(backgroundImg, (displayWidth,displayHeight))
 
 # Sets the creature for the game.
-creatureImg = pygame.image.load('Images/cube.png')
+creatureImg = pygame.image.load(resource_path('Images/cube.png'))
 creatureImg = pygame.transform.scale(creatureImg, ((displayWidth / 2), (displayHeight / 2)))
 
 # Sets the main song to a continuous loop.
-pygame.mixer.music.load('Audio/main.ogg')
+pygame.mixer.music.load(resource_path('Audio/main.ogg'))
 pygame.mixer.music.play(-1)
 
 # Sets the three buttons Play, Feed, and Clean.
@@ -35,15 +50,15 @@ def resize(e):
     # Need to reference the global variables instead of creating new ones.
     global gameDisplay, displayWidth, displayHeight, backgroundImg, creatureImg, playButton, feedButton, cleanButton
 
-    # Update game window's size.
+    # Update the window's dimensions.
     gameDisplay = pygame.display.set_mode(event.dict['size'],pygame.RESIZABLE)
     displayWidth = event.dict['size'][0]
     displayHeight = event.dict['size'][1]
 
     # Update background and creature size. (Picture needs to be set again because of resizing issues.)
-    backgroundImg = pygame.image.load('Images/background.png')
+    backgroundImg = pygame.image.load(resource_path('Images/background.png'))
     backgroundImg = pygame.transform.scale(backgroundImg, (displayWidth,displayHeight))
-    creatureImg = pygame.image.load('Images/cube.png')
+    creatureImg = pygame.image.load(resource_path('Images/cube.png'))
     creatureImg = pygame.transform.scale(creatureImg, ((displayWidth / 2), (displayHeight / 2)))
 
     # Update the sizes and positions of the buttons.
@@ -66,11 +81,11 @@ while not crashed:
         if event.type == pygame.VIDEORESIZE:
             resize(event)
         if 'click' in playButton.handleEvent(event):
-            pass # Replace pass for code that handles play button's action.
+            print "Play" # Replace print and string for code that handles play button's action.
         if 'click' in feedButton.handleEvent(event):
-            pass # Replace pass for code that handles feed button's action.
+            print "Feed" # Replace print and string for code that handles feed button's action.
         if 'click' in cleanButton.handleEvent(event):
-            pass # Replace pass for code that handles clean button's action.
+            print "Clean" # Replace print and string for code that handles clean button's action.
 
     gameDisplay.blit(backgroundImg,(0,0))
     creaturePos(displayWidth * 0.25,displayHeight * 0.4)
@@ -83,5 +98,3 @@ while not crashed:
     clock.tick(60) # FPS = 60
 
 pygame.quit()
-quit()
-sys.exit()
