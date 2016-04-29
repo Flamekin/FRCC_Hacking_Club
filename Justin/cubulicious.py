@@ -45,9 +45,7 @@ feedButton = pygbutton.PygButton((displayWidth / 2.35, displayHeight / 1.125, 12
 cleanButton = pygbutton.PygButton((displayWidth / 1.3, displayHeight / 1.125, 120, 60),'Clean')
 
 # Sets the animations for the buttons.
-playAnimation = pygame.movie.Movie(resource_path('play.mpg'))
-feedAnimation = pygame.movie.Movie(resource_path('feed.mpg'))
-cleanAnimation = pygame.movie.Movie(resource_path('clean.mpg'))
+    # To be implemented.
 
 def resize(e):
     """ Function for redrawing the game window's contents to scale. """
@@ -86,8 +84,7 @@ while not crashed:
         if event.type == pygame.VIDEORESIZE:
             resize(event)
         if 'click' in playButton.handleEvent(event):
-            gameDisplay.blit(pygame.Surface(playAnimation.get_size()).convert())
-            playAnimation.play()
+            print "Play" # Replace print and string for code that handles play button's action.
         if 'click' in feedButton.handleEvent(event):
             print "Feed" # Replace print and string for code that handles feed button's action.
         if 'click' in cleanButton.handleEvent(event):
